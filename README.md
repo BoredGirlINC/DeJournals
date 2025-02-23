@@ -1,135 +1,138 @@
-# DeJournals - Decentralized Science Platform
+Below is an **updated README** in **Markdown** format that reflects the current state of the **DeJournals** project, including its newly introduced **Browse Journals** and **DeForums** pages, the home page layout, and relevant features.
 
-DeJournals is a modern, decentralized platform for scientific research paper sharing and discussion. It aims to democratize access to scientific knowledge while ensuring credibility through community validation.
+---
 
-## Features
+# DeJournals
 
-- **Decentralized Paper Storage**: Research papers are stored using IPFS, ensuring permanent and distributed access
-- **Real-time Global Chat**: Connect with researchers worldwide through our integrated chat system
-- **AI-Generated Summaries**: Automatic abstracts and briefs for research submissions
-- **Transparent Peer Review**: Community-driven validation with upvotes and XP-based credibility tracking
-- **Web3 Integration**: Decentralized user profiles and reputation tracking
+A decentralized science platform focused on empowering open-access research, transparent peer review, and global collaboration. DeJournals brings together researchers, enthusiasts, and innovators under a **Neumorphic + Tailwind** aesthetic, offering features like peer-upvoted journals, trending discussions, and a community-driven forum.
 
-## Getting Started
+---
 
-### Prerequisites
+## Table of Contents
+1. [Overview](#overview)  
+2. [Key Features](#key-features)  
+3. [File Structure](#file-structure)  
+4. [Installation & Setup](#installation--setup)  
+5. [Usage](#usage)  
+6. [Navigation & Pages](#navigation--pages)  
+7. [Contributing](#contributing)  
+8. [License](#license)  
 
-- Node.js (v14 or higher)
-- A modern web browser
-- API key for the DeJournals backend (for development)
+---
 
-### Installation
+## Overview
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/dejournals.git
-   cd dejournals
-   ```
+**DeJournals** is built for researchers and science enthusiasts aiming to share, discover, and discuss cutting-edge work in a **decentralized** manner. We combine **Web3** ethos (transparent on-chain reputation) with user-friendly interfaces (neumorphic design, accessible chat features, and intuitive navigation) to create an inclusive hub for research.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+---
 
-3. Set up environment variables:
-   - Create a `.env` file in the project root
-   - Add your API key:
-     ```
-     DEJOURNALS_API_KEY=your_api_key_here
-     ```
-   - Note: Never commit the `.env` file to version control
+## Key Features
 
-4. Start a local development server:
-   ```bash
-   # If using Python
-   python -m http.server 8000
-   
-   # If using Node.js
-   npx serve
-   ```
+- **Neumorphic UI + Tailwind**  
+  A sleek interface blending modern web standards with a soft, raised design aesthetic.
 
-5. Open `http://localhost:8000` in your browser
+- **Decentralized Peer Review**  
+  Upvotes, comments, and credibility scores (XP) help surface top-quality research.
 
-## Usage
+- **Browse Journals**  
+  A dedicated page to **search** and **discover** new papers, apply advanced filters, and quickly find relevant studies.
 
-### Uploading a Paper
+- **Mindshare Analysis**  
+  AI-driven overview of trending topics based on user discussions, submitted papers, and upvotes.
 
-1. Click the "Upload Research" button in the navigation bar
-2. Fill in the paper details:
-   - Title
-   - Abstract
-   - PDF file
-3. Submit the form
+- **DeForums**  
+  A forum-like page for community discussions, featuring a search bar for topics, a carousel of trending threads, upvote counts, and user participation metrics.
 
-### Using the Chat
+- **Global Grants & Funding (Planned)**  
+  Roadmap includes seamless integration for community-driven grants and decentralized funding models.
 
-1. Click "Live Chat" in the navigation
-2. Type your message in the input field
-3. Press Enter or click the send button
+---
 
-### Browsing Papers
+## File Structure
 
-- View latest papers in the "Latest Research Papers" section
-- Use upvotes to support valuable research
-- Click on papers to view full details
-
-## Project Structure
+A simplified view of the project’s main files:
 
 ```
 dejournals/
-├── index.html          # Main HTML file
+├── index.html          # Home page (includes hero carousel, mindshare analysis, feature highlights)
+├── browse.html         # Browse Journals page (advanced search, featured carousels, etc.)
+├── deforums.html       # DeForums page (search, featured topics, discussion listings, user DeForums Score)
 ├── scripts/
-│   └── main.js        # Modularized JavaScript code
-├── .env               # Environment variables (not in version control)
-├── .gitignore         # Git ignore rules
-├── package.json       # Project dependencies
-└── README.md          # Project documentation
+│   └── main.js         # Primary JavaScript file, containing common logic, DB fetch calls, etc.
+├── styles/             # (Optional) Could contain custom CSS or placeholders if separated from Tailwind
+├── package.json        # Project metadata (scripts, dependencies)
+├── package-lock.json   # Lock file for npm dependencies
+└── README.md           # This file
 ```
 
-## Development
+> Note: File structure can vary if you’re integrating a bundler, build system, or a more complex environment.
 
-The project uses a modular JavaScript architecture with the following key components:
+---
 
-- `ChatModule`: Handles real-time chat functionality
-- `PaperModule`: Manages paper uploads and display
-- `ApiService`: Centralizes API communication
-- `ErrorHandler`: Provides consistent error handling
+## Installation & Setup
 
-### API Integration
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/YourUsername/DeJournals.git
+   cd DeJournals
+   ```
 
-The platform integrates with a MongoDB-based backend through a REST API. Key endpoints:
+2. **Install Dependencies**  
+   ```bash
+   npm install
+   ```
+   (If you’re using Yarn, run `yarn install`)
 
-- `/messages`: Chat message management
-- `/papers`: Research paper management
+3. **Start a Dev Server (if applicable)**  
+   - If you have a local server or use a static server package (like `serve`), do:
+     ```bash
+     npx serve .
+     ```
+   - Alternatively, open `index.html` directly in your browser (though some features may require a local server).
 
-### Environment Variables
+---
 
-Required environment variables:
+## Usage
 
-- `DEJOURNALS_API_KEY`: API key for backend access
+- **Home Page** (`index.html`):  
+  Displays a **carousel** of science-related images with hero words, a “Why DeJournals?” section highlighting the platform’s benefits, **Mindshare Analysis** charts, and a leaderboard of top contributors.
+
+- **Browse Journals** (`browse.html`):  
+  Allows you to **search** for journals, filter them via an **Advanced Search** (collapsible) section, and view **featured** or **latest** papers. It’s ideal for discovering new research or exploring trending categories.
+
+- **DeForums** (`deforums.html`):  
+  A discussion hub with a dedicated **search bar** for forum threads, an **add topic** button, **featured/popular** topics carousel, full listing of discussion threads (upvotes, participant count, messages), and your personal **DeForums Score** (similar to XP, but for forum contributions).
+
+---
+
+## Navigation & Pages
+
+Across all pages, you’ll find a **consistent top navigation bar** featuring:
+- **DeForums** button (replacing any legacy “Live Chat” references).
+- **Browse Journals** link.
+- Branding (e.g., DeJournals logo/text).
+- Upload Research (if available on certain pages).
+
+A **standard footer** is also consistent site-wide, providing quick links, social icons, and disclaimers.
+
+---
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+1. **Fork** this repository and **clone** your fork locally.  
+2. **Create** a feature branch (`git checkout -b feature/someFeature`).  
+3. **Commit** your changes (`git commit -m "Add some feature"`).  
+4. **Push** to your fork (`git push origin feature/someFeature`).  
+5. **Open a Pull Request**, describing your changes in detail.
 
-## Security Considerations
+We encourage collaboration and welcome bug reports, feature requests, or general feedback to help improve DeJournals.
 
-- API keys are stored in environment variables
-- File uploads are validated for type and size
-- User input is sanitized before display
-- CORS policies are enforced
+---
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE). You’re free to modify, distribute, and use DeJournals within the terms of this license. See the [LICENSE](LICENSE) file for more information.
 
-## Contact
+---
 
-For questions or support, reach out through:
-- GitHub Issues
-- Discord Community
-- Email: support@dejournals.com
+**Explore, discuss, and share cutting-edge research—decentralized and democratized with DeJournals.** Feel free to reach out or open an issue for suggestions, improvements, or questions!
