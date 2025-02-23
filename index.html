@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="DeJournals - A decentralized science platform for research paper sharing and discussion">
+        <title>DeJournals - Decentralized Science Platform</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <style>
+            * {
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .neumorph {
+                border-radius: 20px;
+                background: #e0e5ec;
+                box-shadow: 20px 20px 60px #bec3c9,
+                           -20px -20px 60px #ffffff;
+            }
+
+            .neumorph-inset {
+                border-radius: 20px;
+                background: #e0e5ec;
+                box-shadow: inset 5px 5px 10px #bec3c9,
+                           inset -5px -5px 10px #ffffff;
+            }
+
+            .neumorph-button {
+                border-radius: 10px;
+                background: #e0e5ec;
+                box-shadow: 5px 5px 10px #bec3c9,
+                           -5px -5px 10px #ffffff;
+                transition: all 0.3s ease;
+                color: #2d3748; /* Improved text contrast */
+            }
+
+            .neumorph-button:hover {
+                box-shadow: 3px 3px 6px #bec3c9,
+                           -3px -3px 6px #ffffff;
+                transform: translateY(-2px);
+            }
+
+            .neumorph-button:focus {
+                outline: 2px solid #4a90e2;
+                outline-offset: 2px;
+            }
+
+            .network-bg {
+                background-image: radial-gradient(#4a90e2 1px, transparent 1px);
+                background-size: 30px 30px;
+                opacity: 0.1;
+            }
+
+            .loading {
+                border: 4px solid #f3f3f3;
+                border-top: 4px solid #3498db;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            #chat-messages {
+                height: 300px;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #4a90e2 #e0e5ec;
+            }
+
+            .swiper-container {
+                width: 100%;
+                height: 300px;
+            }
+
+            .swiper-slide {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            /* Improved text contrast */
+            .text-gray-600 {
+                color: #4a5568;
+            }
+
+            /* Improved focus styles for accessibility */
+            a:focus, button:focus, input:focus, textarea:focus {
+                outline: 2px solid #4a90e2;
+                outline-offset: 2px;
+            }
+        </style>
+    </head>
+    <body class="bg-[#e0e5ec] min-h-screen">
+        <!-- Navigation -->
+        <nav class="p-4 neumorph fixed w-full z-50" role="navigation" aria-label="Main navigation">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="bi bi-journal-text text-3xl text-blue-600" aria-hidden="true"></i>
+                    <span class="text-2xl font-bold text-gray-700">DeJournals</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="browse.html" class="neumorph-button px-4 py-2" role="button">Browse Journals</a>
+                    <a href="#" class="neumorph-button px-4 py-2" role="button">Live Chat</a>
+                    <button onclick="PaperModule.showUploadModal()" class="neumorph-button px-4 py-2 bg-blue-500 text-white">Upload Research</button>
+                </div>
+                <button id="profile" class="neumorph-button p-2" aria-label="User profile">
+                    <i class="bi bi-person-circle text-2xl" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="pt-24 pb-16 relative overflow-hidden">
+            <div class="network-bg absolute inset-0"></div>
+            <div class="container mx-auto px-4 relative">
+                <div class="swiper-container" role="region" aria-label="Feature highlights">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+                                Decentralised
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8">
+                                Empowering science through distributed networks.
+                            </p>
+                        </div>
+                        <div class="swiper-slide">
+                            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+                                Demonopolised
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8">
+                                Breaking barriers, democratizing access to knowledge.
+                            </p>
+                        </div>
+                        <div class="swiper-slide">
+                            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+                                Trusted Verified Peers
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8">
+                                Ensuring credibility through community validation.
+                            </p>
+                        </div>
+                        <div class="swiper-slide">
+                            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+                                Global Grants
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8">
+                                Funding innovation, supporting researchers worldwide.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Feed Section -->
+        <div class="container mx-auto px-4 mb-16">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Latest Papers -->
+                <div class="neumorph p-6">
+                    <h2 class="text-2xl font-bold mb-4">Latest Research Papers</h2>
+                    <div id="papers-feed" class="space-y-4" role="feed" aria-label="Latest research papers">
+                        <div class="animate-pulse space-y-4">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Chat Preview -->
+                <div class="neumorph p-6">
+                    <h2 class="text-2xl font-bold mb-4">Trending Discussions</h2>
+                    <div id="chat-preview" class="space-y-4" role="log" aria-label="Trending discussions">
+                        <div class="animate-pulse space-y-4">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="container mx-auto px-4 mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Why DeJournals?</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="neumorph p-6 text-center">
+                    <i class="bi bi-robot text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
+                    <h3 class="text-xl font-bold mb-2">AI-Generated Summaries</h3>
+                    <p class="text-gray-600">Automatic abstracts & briefs for research submissions</p>
+                </div>
+                <div class="neumorph p-6 text-center">
+                    <i class="bi bi-check2-circle text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
+                    <h3 class="text-xl font-bold mb-2">Transparent Peer Review</h3>
+                    <p class="text-gray-600">Upvotes, comments & credibility tracking via XP</p>
+                </div>
+                <div class="neumorph p-6 text-center">
+                    <i class="bi bi-chat-dots text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
+                    <h3 class="text-xl font-bold mb-2">Real-time Global Chat</h3>
+                    <p class="text-gray-600">Connect with other researchers instantly</p>
+                </div>
+                <div class="neumorph p-6 text-center">
+                    <i class="bi bi-diagram-3 text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
+                    <h3 class="text-xl font-bold mb-2">Decentralized Profiles</h3>
+                    <p class="text-gray-600">Reputation & contributions on-chain</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="container mx-auto px-4 mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Top Contributors</h2>
+            <div id="leaderboard" class="grid md:grid-cols-3 gap-8" role="region" aria-label="Top contributors">
+                <!-- Leaderboard entries will be populated here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="neumorph p-8" role="contentinfo">
+            <div class="container mx-auto">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="font-bold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-500">Browse Journals</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Submit Research</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Live Chat</a></li>
+                            <li><a href="#" class="hover:text-blue-500">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-4">Social Links</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-2xl hover:text-blue-500" aria-label="Twitter"><i class="bi bi-twitter" aria-hidden="true"></i></a>
+                            <a href="#" class="text-2xl hover:text-blue-500" aria-label="Discord"><i class="bi bi-discord" aria-hidden="true"></i></a>
+                            <a href="#" class="text-2xl hover:text-blue-500" aria-label="Email"><i class="bi bi-envelope" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-4">Powered By</h3>
+                        <div class="flex space-x-4">
+                            <span>Web3Auth</span>
+                            <span>OpenAI</span>
+                            <span>IPFS</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">
+                            © 2023 DeJournals. All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Chat Widget -->
+        <div id="chat-widget" class="fixed bottom-4 right-4 z-50 hidden">
+            <div class="neumorph w-80">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h3 class="font-bold">Global Chat</h3>
+                    <button onclick="ChatModule.toggle()" class="text-gray-500 hover:text-gray-700" aria-label="Close chat">
+                        <i class="bi bi-x-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div id="chat-messages" class="p-4 neumorph-inset" role="log" aria-label="Chat messages"></div>
+                <div class="p-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="chat-input" placeholder="Type a message..." 
+                               class="neumorph-inset p-2 w-full" aria-label="Message input">
+                        <button onclick="ChatModule.sendMessage()" class="neumorph-button p-2" aria-label="Send message">
+                            <i class="bi bi-send" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Modal -->
+        <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" role="dialog" aria-labelledby="upload-modal-title">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="neumorph w-full max-w-2xl p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 id="upload-modal-title" class="text-2xl font-bold">Upload Research Paper</h2>
+                        <button onclick="PaperModule.hideUploadModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close modal">
+                            <i class="bi bi-x-lg" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <form id="upload-form" class="space-y-4">
+                        <div>
+                            <label for="paper-title" class="block mb-2">Title</label>
+                            <input type="text" id="paper-title" class="neumorph-inset p-2 w-full" required>
+                        </div>
+                        <div>
+                            <label for="paper-abstract" class="block mb-2">Abstract</label>
+                            <textarea id="paper-abstract" class="neumorph-inset p-2 w-full h-32" required></textarea>
+                        </div>
+                        <div>
+                            <label for="paper-file" class="block mb-2">Paper (PDF)</label>
+                            <input type="file" id="paper-file" accept=".pdf" class="neumorph-inset p-2 w-full" required>
+                        </div>
+                        <div class="flex justify-end gap-4">
+                            <button type="button" onclick="PaperModule.hideUploadModal()" class="neumorph-button px-4 py-2">
+                                Cancel
+                            </button>
+                            <button type="submit" class="neumorph-button px-4 py-2 bg-blue-500 text-white">
+                                Upload
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="scripts/main.js"></script>
+    </body>
+    </html>

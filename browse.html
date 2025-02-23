@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse and discover research papers on DeJournals - A decentralized science platform">
+    <title>DeJournals Explorer: Discover & Contribute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .neumorph {
+            border-radius: 20px;
+            background: #e0e5ec;
+            box-shadow: 20px 20px 60px #bec3c9,
+                       -20px -20px 60px #ffffff;
+        }
+
+        .neumorph-inset {
+            border-radius: 20px;
+            background: #e0e5ec;
+            box-shadow: inset 5px 5px 10px #bec3c9,
+                       inset -5px -5px 10px #ffffff;
+        }
+
+        .neumorph-button {
+            border-radius: 10px;
+            background: #e0e5ec;
+            box-shadow: 5px 5px 10px #bec3c9,
+                       -5px -5px 10px #ffffff;
+            transition: all 0.3s ease;
+            color: #2d3748;
+        }
+
+        .neumorph-button:hover {
+            box-shadow: 3px 3px 6px #bec3c9,
+                       -3px -3px 6px #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .neumorph-button:focus {
+            outline: 2px solid #4a90e2;
+            outline-offset: 2px;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 300px;
+            padding: 20px 0;
+        }
+
+        .swiper-slide {
+            background: #e0e5ec;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px #bec3c9,
+                       -5px -5px 10px #ffffff;
+        }
+
+        /* Advanced search panel animation */
+        .advanced-search {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .advanced-search.active {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-[#e0e5ec] min-h-screen">
+    <!-- Navigation -->
+    <nav class="p-4 neumorph fixed w-full z-50" role="navigation" aria-label="Main navigation">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="bi bi-journal-text text-3xl text-blue-600" aria-hidden="true"></i>
+                    <span class="text-2xl font-bold text-gray-700">DeJournals</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="browse.html" class="neumorph-button px-4 py-2" role="button" aria-current="page">Browse Journals</a>
+                <a href="#" class="neumorph-button px-4 py-2" role="button">Live Chat</a>
+                <button onclick="PaperModule.showUploadModal()" class="neumorph-button px-4 py-2 bg-blue-500 text-white">Upload Research</button>
+            </div>
+            <button id="profile" class="neumorph-button p-2" aria-label="User profile">
+                <i class="bi bi-person-circle text-2xl" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="pt-24 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="neumorph p-6">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex gap-4">
+                        <input type="text" 
+                               placeholder="Search journals, authors, or keywords..." 
+                               class="neumorph-inset p-4 flex-grow"
+                               aria-label="Search input">
+                        <button class="neumorph-button px-6 py-4 bg-blue-500 text-white">
+                            <i class="bi bi-search" aria-hidden="true"></i>
+                            Search
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button onclick="toggleAdvancedSearch()" 
+                                class="text-blue-600 hover:text-blue-700 flex items-center gap-2">
+                            <i class="bi bi-sliders" aria-hidden="true"></i>
+                            Advanced Search
+                        </button>
+                        <span class="text-sm text-gray-600">Found 1,234 journals</span>
+                    </div>
+                    <div id="advanced-search" class="advanced-search neumorph-inset p-4">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block mb-2">Publication Date</label>
+                                <select class="neumorph-inset p-2 w-full">
+                                    <option>Last 30 days</option>
+                                    <option>Last 90 days</option>
+                                    <option>Last year</option>
+                                    <option>All time</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block mb-2">Sort By</label>
+                                <select class="neumorph-inset p-2 w-full">
+                                    <option>Most relevant</option>
+                                    <option>Most recent</option>
+                                    <option>Most cited</option>
+                                    <option>Most upvoted</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block mb-2">Field of Study</label>
+                                <select class="neumorph-inset p-2 w-full">
+                                    <option>All fields</option>
+                                    <option>Computer Science</option>
+                                    <option>Biology</option>
+                                    <option>Physics</option>
+                                    <option>Chemistry</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Journals Section -->
+    <div class="container mx-auto px-4 mb-16">
+        <h2 class="text-3xl font-bold mb-8">Featured Journals</h2>
+        <div class="swiper-container featured-journals">
+            <div class="swiper-wrapper">
+                <!-- Placeholder slides - will be populated dynamically -->
+                <div class="swiper-slide">
+                    <h3 class="text-xl font-bold mb-2">Quantum Computing Breakthroughs</h3>
+                    <p class="text-gray-600 mb-4">A comprehensive study of recent advances in quantum computing...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-blue-600">Dr. Sarah Chen</span>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-arrow-up-circle text-green-500"></i>
+                            <span>2.1k upvotes</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- More placeholder slides -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- Latest Journals Section -->
+    <div class="container mx-auto px-4 mb-16">
+        <h2 class="text-3xl font-bold mb-8">Latest Journals</h2>
+        <div class="swiper-container latest-journals">
+            <div class="swiper-wrapper">
+                <!-- Placeholder slides - will be populated dynamically -->
+                <div class="swiper-slide">
+                    <h3 class="text-xl font-bold mb-2">Machine Learning in Healthcare</h3>
+                    <p class="text-gray-600 mb-4">Exploring the applications of ML in medical diagnosis...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-blue-600">Dr. John Smith</span>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-clock text-blue-500"></i>
+                            <span>2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- More placeholder slides -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- Top Contributors Section -->
+    <div class="container mx-auto px-4 mb-16">
+        <h2 class="text-3xl font-bold mb-8">Top Contributors</h2>
+        <div class="grid md:grid-cols-5 gap-6">
+            <!-- Placeholder contributors - will be populated dynamically -->
+            <div class="neumorph p-4 text-center">
+                <img src="https://via.placeholder.com/100" alt="Author avatar" class="w-20 h-20 rounded-full mx-auto mb-4">
+                <h3 class="font-bold">Dr. Emily Wang</h3>
+                <p class="text-sm text-gray-600">32 papers</p>
+                <div class="flex justify-center items-center gap-2 mt-2">
+                    <i class="bi bi-star-fill text-yellow-500"></i>
+                    <span>4.9k XP</span>
+                </div>
+            </div>
+            <!-- More placeholder contributors -->
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="container mx-auto px-4 mb-16">
+        <div class="neumorph p-12 text-center">
+            <h2 class="text-4xl font-bold mb-4">Ready to share your research?</h2>
+            <p class="text-xl text-gray-600 mb-8">Join our community of researchers and make your work accessible to all.</p>
+            <button onclick="PaperModule.showUploadModal()" 
+                    class="neumorph-button px-8 py-4 bg-blue-500 text-white text-xl">
+                Submit My Journal
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="neumorph p-8" role="contentinfo">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="browse.html" class="hover:text-blue-500">Browse Journals</a></li>
+                        <li><a href="#" class="hover:text-blue-500">Submit Research</a></li>
+                        <li><a href="#" class="hover:text-blue-500">Live Chat</a></li>
+                        <li><a href="#" class="hover:text-blue-500">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Social Links</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Twitter">
+                            <i class="bi bi-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Discord">
+                            <i class="bi bi-discord" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Email">
+                            <i class="bi bi-envelope" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Powered By</h3>
+                    <div class="flex space-x-4">
+                        <span>Web3Auth</span>
+                        <span>OpenAI</span>
+                        <span>IPFS</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">
+                        © 2023 DeJournals. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Upload Modal (reused from index.html) -->
+    <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" role="dialog" aria-labelledby="upload-modal-title">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="neumorph w-full max-w-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="upload-modal-title" class="text-2xl font-bold">Upload Research Paper</h2>
+                    <button onclick="PaperModule.hideUploadModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close modal">
+                        <i class="bi bi-x-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <form id="upload-form" class="space-y-4">
+                    <div>
+                        <label for="paper-title" class="block mb-2">Title</label>
+                        <input type="text" id="paper-title" class="neumorph-inset p-2 w-full" required>
+                    </div>
+                    <div>
+                        <label for="paper-abstract" class="block mb-2">Abstract</label>
+                        <textarea id="paper-abstract" class="neumorph-inset p-2 w-full h-32" required></textarea>
+                    </div>
+                    <div>
+                        <label for="paper-file" class="block mb-2">Paper (PDF)</label>
+                        <input type="file" id="paper-file" accept=".pdf" class="neumorph-inset p-2 w-full" required>
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="PaperModule.hideUploadModal()" class="neumorph-button px-4 py-2">
+                            Cancel
+                        </button>
+                        <button type="submit" class="neumorph-button px-4 py-2 bg-blue-500 text-white">
+                            Upload
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Initialize Swiper instances for each carousel
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiperOptions = {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+            };
+
+            new Swiper('.featured-journals', swiperOptions);
+            new Swiper('.latest-journals', swiperOptions);
+        });
+
+        // Toggle advanced search panel
+        function toggleAdvancedSearch() {
+            const advancedSearch = document.getElementById('advanced-search');
+            advancedSearch.classList.toggle('active');
+        }
+    </script>
+</body>
+</html> 
