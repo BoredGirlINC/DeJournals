@@ -1,6 +1,3 @@
-Below is an **updated README** in **Markdown** format that reflects the current state of the **DeJournals** project, including its newly introduced **Browse Journals** and **DeForums** pages, the home page layout, and relevant features.
-
----
 
 # DeJournals
 
