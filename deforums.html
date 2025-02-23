@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeForums - Engage in scientific discussions on DeJournals">
+    <title>DeForums - DeJournals Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .neumorph {
+            border-radius: 20px;
+            background: #e0e5ec;
+            box-shadow: 20px 20px 60px #bec3c9,
+                       -20px -20px 60px #ffffff;
+        }
+
+        /* Add specific nav styles */
+        nav.neumorph {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+            background: rgba(224, 229, 236, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .neumorph-inset {
+            border-radius: 20px;
+            background: #e0e5ec;
+            box-shadow: inset 5px 5px 10px #bec3c9,
+                       inset -5px -5px 10px #ffffff;
+        }
+
+        .neumorph-button {
+            border-radius: 10px;
+            background: #e0e5ec;
+            box-shadow: 5px 5px 10px #bec3c9,
+                       -5px -5px 10px #ffffff;
+            transition: all 0.3s ease;
+            color: #2d3748;
+        }
+
+        .neumorph-button:hover {
+            box-shadow: 3px 3px 6px #bec3c9,
+                       -3px -3px 6px #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .neumorph-button:focus {
+            outline: 2px solid #4a90e2;
+            outline-offset: 2px;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 300px;
+            padding: 20px 0;
+        }
+
+        .swiper-slide {
+            background: #e0e5ec;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px #bec3c9,
+                       -5px -5px 10px #ffffff;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#e0e5ec] min-h-screen">
+    <!-- Navigation -->
+    <nav class="p-4 neumorph fixed w-full z-50" role="navigation" aria-label="Main navigation">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="bi bi-journal-text text-3xl text-blue-600" aria-hidden="true"></i>
+                    <span class="text-2xl font-bold text-gray-700">DeJournals</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="browse.html" class="neumorph-button px-4 py-2" role="button">Browse Journals</a>
+                <a href="deforums.html" class="neumorph-button px-4 py-2" role="button" aria-current="page">DeForums</a>
+                <button onclick="PaperModule.showUploadModal()" class="neumorph-button px-4 py-2 bg-blue-500 text-white">Upload Research</button>
+            </div>
+            <button id="profile" class="neumorph-button p-2" aria-label="User profile">
+                <i class="bi bi-person-circle text-2xl" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="pt-24 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="neumorph p-6">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex gap-4">
+                        <input type="text" 
+                               placeholder="Search forum discussions..." 
+                               class="neumorph-inset p-4 flex-grow"
+                               aria-label="Search discussions">
+                        <button class="neumorph-button px-6 py-4 bg-blue-500 text-white">
+                            <i class="bi bi-search" aria-hidden="true"></i>
+                            Search
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button onclick="showNewTopicModal()" 
+                                class="neumorph-button px-6 py-3 bg-blue-500 text-white flex items-center gap-2">
+                            <i class="bi bi-plus-circle" aria-hidden="true"></i>
+                            Add New Discussion Topic
+                        </button>
+                        <span class="text-sm text-gray-600">1,234 active discussions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Topics Carousel -->
+    <div class="container mx-auto px-4 mb-8">
+        <h2 class="text-2xl font-bold mb-6">Featured Discussions</h2>
+        <div class="swiper-container featured-topics">
+            <div class="swiper-wrapper">
+                <!-- Placeholder slides -->
+                <div class="swiper-slide">
+                    <h3 class="text-xl font-bold mb-2">Quantum Computing Ethics</h3>
+                    <p class="text-gray-600 mb-4">Discussing the implications of quantum supremacy...</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-people" aria-hidden="true"></i>
+                            <span>156 participants</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-chat-dots" aria-hidden="true"></i>
+                            <span>432 messages</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- More slides will be added dynamically -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 mb-16">
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Discussion Listings -->
+            <div class="md:col-span-3">
+                <div class="space-y-4">
+                    <!-- Discussion Thread -->
+                    <div class="neumorph p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">AI in Medical Diagnosis</h3>
+                                <p class="text-gray-600">Latest developments in AI-powered medical imaging analysis...</p>
+                            </div>
+                            <button class="neumorph-button p-2" aria-label="Upvote">
+                                <i class="bi bi-arrow-up-circle text-blue-500"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <span class="flex items-center gap-1">
+                                    <i class="bi bi-people" aria-hidden="true"></i>
+                                    42 participants
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <i class="bi bi-chat-dots" aria-hidden="true"></i>
+                                    128 messages
+                                </span>
+                            </div>
+                            <button class="neumorph-button px-4 py-2 text-blue-500">
+                                Post a Message
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- More discussion threads will be added dynamically -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-8 gap-2">
+                    <button class="neumorph-button px-4 py-2" disabled>Previous</button>
+                    <button class="neumorph-button px-4 py-2 bg-blue-500 text-white">1</button>
+                    <button class="neumorph-button px-4 py-2">2</button>
+                    <button class="neumorph-button px-4 py-2">3</button>
+                    <span class="px-4 py-2">...</span>
+                    <button class="neumorph-button px-4 py-2">10</button>
+                    <button class="neumorph-button px-4 py-2">Next</button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="md:col-span-1">
+                <!-- DeForums Score -->
+                <div class="neumorph p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">Your DeForums Score</h3>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-blue-500 mb-2">2,450</div>
+                        <p class="text-gray-600">XP Points</p>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex justify-between">
+                            <span>Topics Created</span>
+                            <span class="font-bold">12</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Messages Posted</span>
+                            <span class="font-bold">156</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Upvotes Received</span>
+                            <span class="font-bold">324</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="neumorph p-8" role="contentinfo">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="browse.html" class="hover:text-blue-500">Browse Journals</a></li>
+                        <li><a href="#" class="hover:text-blue-500">Submit Research</a></li>
+                        <li><a href="deforums.html" class="hover:text-blue-500">DeForums</a></li>
+                        <li><a href="#" class="hover:text-blue-500">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Social Links</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Twitter">
+                            <i class="bi bi-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Discord">
+                            <i class="bi bi-discord" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Email">
+                            <i class="bi bi-envelope" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Powered By</h3>
+                    <div class="flex space-x-4">
+                        <span>Web3Auth</span>
+                        <span>OpenAI</span>
+                        <span>IPFS</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">
+                        © 2023 DeJournals. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- New Topic Modal -->
+    <div id="new-topic-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" role="dialog">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="neumorph w-full max-w-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Start a New Discussion</h2>
+                    <button onclick="hideNewTopicModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="bi bi-x-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <form id="new-topic-form" class="space-y-4">
+                    <div>
+                        <label for="topic-title" class="block mb-2">Topic Title</label>
+                        <input type="text" id="topic-title" class="neumorph-inset p-2 w-full" required>
+                    </div>
+                    <div>
+                        <label for="topic-description" class="block mb-2">Description</label>
+                        <textarea id="topic-description" class="neumorph-inset p-2 w-full h-32" required></textarea>
+                    </div>
+                    <div>
+                        <label for="topic-tags" class="block mb-2">Tags (comma separated)</label>
+                        <input type="text" id="topic-tags" class="neumorph-inset p-2 w-full" placeholder="AI, Research, Science">
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="hideNewTopicModal()" class="neumorph-button px-4 py-2">
+                            Cancel
+                        </button>
+                        <button type="submit" class="neumorph-button px-4 py-2 bg-blue-500 text-white">
+                            Create Topic
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Initialize Swiper
+        document.addEventListener('DOMContentLoaded', () => {
+            new Swiper('.featured-topics', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+            });
+        });
+
+        // Modal functions
+        function showNewTopicModal() {
+            document.getElementById('new-topic-modal').classList.remove('hidden');
+        }
+
+        function hideNewTopicModal() {
+            document.getElementById('new-topic-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html> 

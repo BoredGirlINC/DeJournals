@@ -66,12 +66,16 @@
         .advanced-search {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            opacity: 0;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0;
         }
 
         .advanced-search.active {
             max-height: 500px;
-            transition: max-height 0.5s ease-in;
+            opacity: 1;
+            padding: 1rem;
+            transition: max-height 0.5s ease-in, opacity 0.3s ease-in, padding 0.3s ease-in;
         }
     </style>
 </head>
@@ -87,7 +91,7 @@
             </div>
             <div class="hidden md:flex space-x-6">
                 <a href="browse.html" class="neumorph-button px-4 py-2" role="button" aria-current="page">Browse Journals</a>
-                <a href="#" class="neumorph-button px-4 py-2" role="button">Live Chat</a>
+                <a href="deforums.html" class="neumorph-button px-4 py-2" role="button">DeForums</a>
                 <button onclick="PaperModule.showUploadModal()" class="neumorph-button px-4 py-2 bg-blue-500 text-white">Upload Research</button>
             </div>
             <button id="profile" class="neumorph-button p-2" aria-label="User profile">
@@ -339,10 +343,19 @@
             new Swiper('.latest-journals', swiperOptions);
         });
 
-        // Toggle advanced search panel
+        // Toggle advanced search panel with smooth animation
         function toggleAdvancedSearch() {
             const advancedSearch = document.getElementById('advanced-search');
             advancedSearch.classList.toggle('active');
+            
+            // Update the button text based on state
+            const button = document.querySelector('[onclick="toggleAdvancedSearch()"]');
+            const isExpanded = advancedSearch.classList.contains('active');
+            button.innerHTML = `
+                <i class="bi bi-sliders" aria-hidden="true"></i>
+                ${isExpanded ? 'Hide Advanced Search' : 'Advanced Search'}
+            `;
+            button.setAttribute('aria-expanded', isExpanded);
         }
     </script>
 </body>
