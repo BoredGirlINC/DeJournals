@@ -14,53 +14,100 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .neumorph {
-            border-radius: 20px;
-            background: #e0e5ec;
-            box-shadow: 20px 20px 60px #bec3c9,
-                       -20px -20px 60px #ffffff;
+        /* New clean, modern design inspired by Neko Health */
+        :root {
+            --primary: #0050C8;
+            --primary-light: #EBF3FF;
+            --secondary: #102A43;
+            --gray-light: #F7FAFC;
+            --gray-medium: #E2E8F0;
+            --text-primary: #102A43;
+            --text-secondary: #486581;
         }
 
-        .neumorph-inset {
-            border-radius: 20px;
-            background: #e0e5ec;
-            box-shadow: inset 5px 5px 10px #bec3c9,
-                       inset -5px -5px 10px #ffffff;
+        body {
+            background-color: #FFFFFF;
+            color: var(--text-primary);
         }
 
-        .neumorph-button {
-            border-radius: 10px;
-            background: #e0e5ec;
-            box-shadow: 5px 5px 10px #bec3c9,
-                       -5px -5px 10px #ffffff;
+        .neko-card {
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            color: #2d3748;
         }
 
-        .neumorph-button:hover {
-            box-shadow: 3px 3px 6px #bec3c9,
-                       -3px -3px 6px #ffffff;
+        .neko-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             transform: translateY(-2px);
         }
 
-        .neumorph-button:focus {
-            outline: 2px solid #4a90e2;
-            outline-offset: 2px;
+        /* New button styles */
+        .neko-button {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+            border-radius: 50px;
+            padding: 10px 24px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
-        .swiper-container {
-            width: 100%;
-            height: 300px;
-            padding: 20px 0;
+        .neko-button:hover {
+            background-color: #003D9E;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 80, 200, 0.2);
         }
 
-        .swiper-slide {
-            background: #e0e5ec;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 5px 5px 10px #bec3c9,
-                       -5px -5px 10px #ffffff;
+        .neko-button-secondary {
+            background-color: white;
+            color: var(--primary);
+            font-weight: 500;
+            border-radius: 50px;
+            padding: 10px 24px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary);
         }
+
+        .neko-button-secondary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        /* Input styles */
+        .neko-input {
+            border: 1px solid var(--gray-medium);
+            border-radius: 50px;
+            padding: 12px 24px;
+            transition: all 0.2s ease;
+        }
+
+        .neko-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 80, 200, 0.1);
+            outline: none;
+        }
+
+        /* Section styles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 36rem;
+        }
+
+        /* Old styles preserved for compatibility */
+        .neumorph { @apply neko-card; }
+        .neumorph-inset { @apply neko-input; }
+        .neumorph-button { @apply neko-button; }
 
         /* Advanced search panel animation */
         .advanced-search {
@@ -77,57 +124,100 @@
             padding: 1rem;
             transition: max-height 0.5s ease-in, opacity 0.3s ease-in, padding 0.3s ease-in;
         }
+
+        .swiper-container {
+            width: 100%;
+            height: 300px;
+            padding: 20px 0;
+        }
+
+        .swiper-slide {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Animation Classes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .neko-card,
+        .section-title,
+        .section-subtitle {
+            opacity: 0;
+        }
     </style>
 </head>
-<body class="bg-[#e0e5ec] min-h-screen">
+<body class="bg-white min-h-screen">
     <!-- Navigation -->
-    <nav class="p-4 neumorph fixed w-full z-50" role="navigation" aria-label="Main navigation">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
+    <nav class="fixed w-full top-0 left-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto py-4 px-6">
+            <div class="flex justify-between items-center">
                 <a href="index.html" class="flex items-center space-x-2">
-                    <i class="bi bi-journal-text text-3xl text-blue-600" aria-hidden="true"></i>
-                    <span class="text-2xl font-bold text-gray-700">DeJournals</span>
+                    <i class="bi bi-journal-text text-3xl text-primary"></i>
+                    <span class="text-2xl font-bold text-secondary">DeJournals</span>
                 </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="browse.html" class="font-medium text-primary transition-colors" aria-current="page">Browse Journals</a>
+                    <a href="deforums.html" class="font-medium text-secondary hover:text-primary transition-colors">DeForums</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="PaperModule.showUploadModal()" class="neko-button">
+                        Upload Research
+                    </button>
+                    <button id="profile" class="p-2 text-secondary hover:text-primary" aria-label="User profile">
+                        <i class="bi bi-person-circle text-2xl"></i>
+                    </button>
+                </div>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="browse.html" class="neumorph-button px-4 py-2" role="button" aria-current="page">Browse Journals</a>
-                <a href="deforums.html" class="neumorph-button px-4 py-2" role="button">DeForums</a>
-                <button onclick="PaperModule.showUploadModal()" class="neumorph-button px-4 py-2 bg-blue-500 text-white">Upload Research</button>
-            </div>
-            <button id="profile" class="neumorph-button p-2" aria-label="User profile">
-                <i class="bi bi-person-circle text-2xl" aria-hidden="true"></i>
-            </button>
         </div>
     </nav>
 
     <!-- Search Section -->
     <div class="pt-24 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="neumorph p-6">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="section-title">Browse Research</h1>
+                <p class="section-subtitle mx-auto">Discover papers from researchers around the world</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm p-6">
                 <div class="flex flex-col space-y-4">
                     <div class="flex gap-4">
                         <input type="text" 
                                placeholder="Search journals, authors, or keywords..." 
-                               class="neumorph-inset p-4 flex-grow"
+                               class="neko-input flex-grow"
                                aria-label="Search input">
-                        <button class="neumorph-button px-6 py-4 bg-blue-500 text-white">
-                            <i class="bi bi-search" aria-hidden="true"></i>
+                        <button class="neko-button">
+                            <i class="bi bi-search mr-2"></i>
                             Search
                         </button>
                     </div>
                     <div class="flex justify-between items-center">
                         <button onclick="toggleAdvancedSearch()" 
-                                class="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-                            <i class="bi bi-sliders" aria-hidden="true"></i>
-                            Advanced Search
+                                class="text-primary hover:text-secondary transition-colors flex items-center gap-2">
+                            <i class="bi bi-sliders"></i>
+                            <span id="advanced-search-text">Advanced Search</span>
                         </button>
-                        <span class="text-sm text-gray-600">Found 1,234 journals</span>
+                        <span class="text-sm text-text-secondary">Found 1,234 journals</span>
                     </div>
-                    <div id="advanced-search" class="advanced-search neumorph-inset p-4">
+                    <div id="advanced-search" class="advanced-search bg-gray-light rounded-lg">
                         <div class="grid md:grid-cols-3 gap-4">
                             <div>
-                                <label class="block mb-2">Publication Date</label>
-                                <select class="neumorph-inset p-2 w-full">
+                                <label class="block mb-2 font-medium">Publication Date</label>
+                                <select class="neko-input w-full">
                                     <option>Last 30 days</option>
                                     <option>Last 90 days</option>
                                     <option>Last year</option>
@@ -135,8 +225,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block mb-2">Sort By</label>
-                                <select class="neumorph-inset p-2 w-full">
+                                <label class="block mb-2 font-medium">Sort By</label>
+                                <select class="neko-input w-full">
                                     <option>Most relevant</option>
                                     <option>Most recent</option>
                                     <option>Most cited</option>
@@ -144,8 +234,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block mb-2">Field of Study</label>
-                                <select class="neumorph-inset p-2 w-full">
+                                <label class="block mb-2 font-medium">Field of Study</label>
+                                <select class="neko-input w-full">
                                     <option>All fields</option>
                                     <option>Computer Science</option>
                                     <option>Biology</option>
@@ -156,6 +246,204 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journal List -->
+    <div class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Journal Card 1 -->
+                <div class="neko-card hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Access</span>
+                            <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Computer Science</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Transformer-based Language Models: A Comprehensive Survey</h3>
+                        <p class="text-text-secondary mb-4 line-clamp-3">This paper provides a comprehensive overview of transformer-based language models, their architectures, training methodologies, and applications across various domains.</p>
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/40?img=1" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-medium">Dr. Sarah Johnson</p>
+                                <p class="text-xs text-text-secondary">Published: June 15, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-eye mr-1"></i> 1,243</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-chat mr-1"></i> 28</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-arrow-up-circle mr-1"></i> 156</span>
+                            </div>
+                            <a href="#" class="neko-button-sm">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Card 2 -->
+                <div class="neko-card hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Access</span>
+                            <span class="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full">Biology</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">CRISPR-Cas9 Applications in Genetic Engineering of Plants</h3>
+                        <p class="text-text-secondary mb-4 line-clamp-3">An in-depth analysis of the applications of CRISPR-Cas9 technology in plant genetic engineering, focusing on crop improvements and disease resistance.</p>
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/40?img=2" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-medium">Prof. Michael Chen</p>
+                                <p class="text-xs text-text-secondary">Published: May 22, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-eye mr-1"></i> 987</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-chat mr-1"></i> 42</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-arrow-up-circle mr-1"></i> 203</span>
+                            </div>
+                            <a href="#" class="neko-button-sm">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Card 3 -->
+                <div class="neko-card hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Access</span>
+                            <span class="text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Physics</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Quantum Computing: Current State and Future Prospects</h3>
+                        <p class="text-text-secondary mb-4 line-clamp-3">This review examines the current state of quantum computing, recent advancements in quantum hardware, and potential applications in cryptography and optimization problems.</p>
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/40?img=3" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-medium">Dr. Alex Rodriguez</p>
+                                <p class="text-xs text-text-secondary">Published: April 10, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-eye mr-1"></i> 1,562</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-chat mr-1"></i> 37</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-arrow-up-circle mr-1"></i> 289</span>
+                            </div>
+                            <a href="#" class="neko-button-sm">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Card 4 -->
+                <div class="neko-card hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Access</span>
+                            <span class="text-xs px-2 py-1 bg-red-100 text-red-800 rounded-full">Chemistry</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Novel Catalysts for Sustainable Chemical Processes</h3>
+                        <p class="text-text-secondary mb-4 line-clamp-3">An exploration of novel catalytic materials that enable more environmentally friendly chemical processes with reduced energy consumption and waste generation.</p>
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/40?img=4" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-medium">Dr. Emily Taylor</p>
+                                <p class="text-xs text-text-secondary">Published: March 5, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-eye mr-1"></i> 768</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-chat mr-1"></i> 19</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-arrow-up-circle mr-1"></i> 124</span>
+                            </div>
+                            <a href="#" class="neko-button-sm">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Card 5 -->
+                <div class="neko-card hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Access</span>
+                            <span class="text-xs px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full">Neuroscience</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Neural Correlates of Consciousness: A Meta-Analysis</h3>
+                        <p class="text-text-secondary mb-4 line-clamp-3">This meta-analysis synthesizes findings from neuroimaging studies to identify consistent neural correlates of conscious experience across different experimental paradigms.</p>
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/40?img=5" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-medium">Prof. Samantha Lee</p>
+                                <p class="text-xs text-text-secondary">Published: February 18, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-eye mr-1"></i> 1,105</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-chat mr-1"></i> 31</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-arrow-up-circle mr-1"></i> 176</span>
+                            </div>
+                            <a href="#" class="neko-button-sm">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal Card 6 -->
+                <div class="neko-card hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Access</span>
+                            <span class="text-xs px-2 py-1 bg-pink-100 text-pink-800 rounded-full">Medicine</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">mRNA Vaccines: Principles, Challenges, and Future Directions</h3>
+                        <p class="text-text-secondary mb-4 line-clamp-3">A comprehensive review of mRNA vaccine technology, addressing design principles, manufacturing challenges, and potential applications beyond infectious diseases.</p>
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/40?img=6" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-medium">Dr. James Wilson</p>
+                                <p class="text-xs text-text-secondary">Published: January 30, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-eye mr-1"></i> 2,341</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-chat mr-1"></i> 64</span>
+                                <span class="flex items-center text-sm text-text-secondary"><i class="bi bi-arrow-up-circle mr-1"></i> 412</span>
+                            </div>
+                            <a href="#" class="neko-button-sm">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12">
+                <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        <span class="sr-only">Previous</span>
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary text-sm font-medium text-white hover:bg-secondary">
+                        1
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                        2
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                        3
+                    </a>
+                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                        ...
+                    </span>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                        10
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        <span class="sr-only">Next</span>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </nav>
             </div>
         </div>
     </div>
@@ -237,43 +525,65 @@
     </div>
 
     <!-- Footer -->
-    <footer class="neumorph p-8" role="contentinfo">
-        <div class="container mx-auto">
+    <footer class="bg-gray-light py-16">
+        <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="browse.html" class="hover:text-blue-500">Browse Journals</a></li>
-                        <li><a href="#" class="hover:text-blue-500">Submit Research</a></li>
-                        <li><a href="#" class="hover:text-blue-500">Live Chat</a></li>
-                        <li><a href="#" class="hover:text-blue-500">FAQ</a></li>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="browse.html" class="text-text-secondary hover:text-primary transition-colors">Browse Journals</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors">Submit Research</a></li>
+                        <li><a href="deforums.html" class="text-text-secondary hover:text-primary transition-colors">DeForums</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors">FAQ</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="font-bold mb-4">Social Links</h3>
+                    <h3 class="text-lg font-bold mb-6">Social Links</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Twitter">
-                            <i class="bi bi-twitter" aria-hidden="true"></i>
+                        <a href="#" class="bg-white p-3 rounded-full text-primary hover:text-white hover:bg-primary transition-colors" aria-label="Twitter">
+                            <i class="bi bi-twitter"></i>
                         </a>
-                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Discord">
-                            <i class="bi bi-discord" aria-hidden="true"></i>
+                        <a href="#" class="bg-white p-3 rounded-full text-primary hover:text-white hover:bg-primary transition-colors" aria-label="Discord">
+                            <i class="bi bi-discord"></i>
                         </a>
-                        <a href="#" class="text-2xl hover:text-blue-500" aria-label="Email">
-                            <i class="bi bi-envelope" aria-hidden="true"></i>
+                        <a href="#" class="bg-white p-3 rounded-full text-primary hover:text-white hover:bg-primary transition-colors" aria-label="Email">
+                            <i class="bi bi-envelope"></i>
                         </a>
                     </div>
                 </div>
                 <div>
-                    <h3 class="font-bold mb-4">Powered By</h3>
-                    <div class="flex space-x-4">
-                        <span>Web3Auth</span>
-                        <span>OpenAI</span>
-                        <span>IPFS</span>
+                    <h3 class="text-lg font-bold mb-6">Powered By</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <div class="bg-white p-1 rounded">
+                                <i class="bi bi-shield-check text-primary"></i>
+                            </div>
+                            <span>Web3Auth</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="bg-white p-1 rounded">
+                                <i class="bi bi-cpu text-primary"></i>
+                            </div>
+                            <span>OpenAI</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="bg-white p-1 rounded">
+                                <i class="bi bi-hdd-network text-primary"></i>
+                            </div>
+                            <span>IPFS</span>
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-600">
+                    <div class="flex items-center mb-6">
+                        <i class="bi bi-journal-text text-2xl text-primary mr-2"></i>
+                        <span class="text-xl font-bold text-secondary">DeJournals</span>
+                    </div>
+                    <p class="text-sm text-text-secondary">
                         © 2023 DeJournals. All rights reserved.
+                    </p>
+                    <p class="text-sm text-text-secondary mt-2">
+                        Decentralized science platform for open access research
                     </p>
                 </div>
             </div>
@@ -343,20 +653,50 @@
             new Swiper('.latest-journals', swiperOptions);
         });
 
-        // Toggle advanced search panel with smooth animation
+        // Advanced Search Toggle
         function toggleAdvancedSearch() {
             const advancedSearch = document.getElementById('advanced-search');
-            advancedSearch.classList.toggle('active');
+            const advancedSearchText = document.getElementById('advanced-search-text');
             
-            // Update the button text based on state
-            const button = document.querySelector('[onclick="toggleAdvancedSearch()"]');
-            const isExpanded = advancedSearch.classList.contains('active');
-            button.innerHTML = `
-                <i class="bi bi-sliders" aria-hidden="true"></i>
-                ${isExpanded ? 'Hide Advanced Search' : 'Advanced Search'}
-            `;
-            button.setAttribute('aria-expanded', isExpanded);
+            if (advancedSearch.classList.contains('hidden')) {
+                advancedSearch.classList.remove('hidden');
+                advancedSearch.classList.add('p-4');
+                advancedSearchText.textContent = 'Close Advanced Search';
+            } else {
+                advancedSearch.classList.add('hidden');
+                advancedSearch.classList.remove('p-4');
+                advancedSearchText.textContent = 'Advanced Search';
+            }
         }
+
+        // Hide advanced search by default
+        document.addEventListener('DOMContentLoaded', function() {
+            const advancedSearch = document.getElementById('advanced-search');
+            advancedSearch.classList.add('hidden');
+            
+            // Initialize animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.1
+            });
+            
+            // Observe all cards for fade-in animation
+            document.querySelectorAll('.neko-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Observe section titles and subtitles
+            document.querySelectorAll('.section-title, .section-subtitle').forEach(element => {
+                observer.observe(element);
+            });
+        });
     </script>
 </body>
 </html> 

@@ -14,77 +14,140 @@
                 font-family: 'Poppins', sans-serif;
             }
 
-            .neumorph {
-                border-radius: 20px;
-                background: #e0e5ec;
-                box-shadow: 20px 20px 60px #bec3c9,
-                           -20px -20px 60px #ffffff;
+            /* New clean, modern design inspired by Neko Health */
+            :root {
+                --primary: #0050C8;
+                --primary-light: #EBF3FF;
+                --secondary: #102A43;
+                --gray-light: #F7FAFC;
+                --gray-medium: #E2E8F0;
+                --text-primary: #102A43;
+                --text-secondary: #486581;
             }
 
-            /* Add specific nav styles */
-            nav.neumorph {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 1000;
-                border-radius: 0 0 20px 20px;
-                background: rgba(224, 229, 236, 0.95);
-                backdrop-filter: blur(10px);
+            body {
+                background-color: #FFFFFF;
+                color: var(--text-primary);
             }
 
-            .neumorph-inset {
-                border-radius: 20px;
-                background: #e0e5ec;
-                box-shadow: inset 5px 5px 10px #bec3c9,
-                           inset -5px -5px 10px #ffffff;
-            }
-
-            .neumorph-button {
-                border-radius: 10px;
-                background: #e0e5ec;
-                box-shadow: 5px 5px 10px #bec3c9,
-                           -5px -5px 10px #ffffff;
+            .neko-card {
+                border-radius: 8px;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
                 transition: all 0.3s ease;
-                color: #2d3748; /* Improved text contrast */
             }
 
-            .neumorph-button:hover {
-                box-shadow: 3px 3px 6px #bec3c9,
-                           -3px -3px 6px #ffffff;
+            .neko-card:hover {
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
                 transform: translateY(-2px);
             }
 
-            .neumorph-button:focus {
-                outline: 2px solid #4a90e2;
-                outline-offset: 2px;
+            /* New button styles */
+            .neko-button {
+                background-color: var(--primary);
+                color: white;
+                font-weight: 500;
+                border-radius: 50px;
+                padding: 10px 24px;
+                transition: all 0.3s ease;
+                border: none;
+                cursor: pointer;
             }
 
-            .network-bg {
-                background-image: radial-gradient(#4a90e2 1px, transparent 1px);
-                background-size: 30px 30px;
-                opacity: 0.1;
+            .neko-button:hover {
+                background-color: #003D9E;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0, 80, 200, 0.2);
             }
 
-            .loading {
-                border: 4px solid #f3f3f3;
-                border-top: 4px solid #3498db;
-                border-radius: 50%;
-                width: 30px;
-                height: 30px;
-                animation: spin 1s linear infinite;
+            .neko-button-secondary {
+                background-color: white;
+                color: var(--primary);
+                font-weight: 500;
+                border-radius: 50px;
+                padding: 10px 24px;
+                transition: all 0.3s ease;
+                border: 1px solid var(--primary);
             }
 
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
+            .neko-button-secondary:hover {
+                background-color: var(--primary-light);
+                transform: translateY(-1px);
             }
 
+            /* Nav styles */
+            nav {
+                background-color: white;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            /* Input styles */
+            .neko-input {
+                border: 1px solid var(--gray-medium);
+                border-radius: 50px;
+                padding: 12px 24px;
+                transition: all 0.2s ease;
+            }
+
+            .neko-input:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(0, 80, 200, 0.1);
+                outline: none;
+            }
+
+            /* Section styles */
+            .section-title {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: var(--secondary);
+                margin-bottom: 1.5rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.25rem;
+                color: var(--text-secondary);
+                margin-bottom: 2rem;
+                max-width: 36rem;
+            }
+
+            /* Hero section */
+            .hero-section {
+                padding-top: 120px;
+                padding-bottom: 80px;
+                position: relative;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+                font-weight: 800;
+                line-height: 1.1;
+                margin-bottom: 1.5rem;
+                color: var(--secondary);
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+                color: var(--text-secondary);
+                margin-bottom: 2rem;
+                max-width: 36rem;
+            }
+
+            /* New footer styles */
+            footer {
+                background-color: var(--gray-light);
+                padding: 4rem 0;
+            }
+
+            /* Old styles preserved for compatibility */
+            .neumorph { @apply neko-card; }
+            .neumorph-inset { @apply neko-input; }
+            .neumorph-button { @apply neko-button; }
+
+            /* Continue with some existing styles */
             #chat-messages {
                 height: 300px;
                 overflow-y: auto;
                 scrollbar-width: thin;
-                scrollbar-color: #4a90e2 #e0e5ec;
             }
 
             .swiper-container {
@@ -100,126 +163,9 @@
                 text-align: center;
             }
 
-            /* Improved text contrast */
-            .text-gray-600 {
-                color: #4a5568;
-            }
-
-            /* Improved focus styles for accessibility */
-            a:focus, button:focus, input:focus, textarea:focus {
-                outline: 2px solid #4a90e2;
-                outline-offset: 2px;
-            }
-
-            .hero-swiper {
-                margin-top: 80px; /* Space for fixed nav */
-                width: 100%;
-                height: 400px; /* Match mindshare-chart height */
-            }
-
-            .hero-slide {
-                position: relative;
-                height: 400px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(145deg, #e0e5ec, #f0f5fc);
-                overflow: hidden;
-            }
-
-            .hero-decoration {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                pointer-events: none;
-                opacity: 0.1;
-                background: 
-                    linear-gradient(45deg, transparent 45%, #4a90e2 45%, #4a90e2 55%, transparent 55%),
-                    linear-gradient(-45deg, transparent 45%, #4a90e2 45%, #4a90e2 55%, transparent 55%);
-                background-size: 30px 30px;
-            }
-
-            .hero-content {
-                position: relative;
-                z-index: 2;
-                text-align: center;
-                padding: 2rem;
-                max-width: 1000px;
-                margin: 0 auto;
-            }
-
-            .hero-title {
-                font-size: clamp(3rem, 6vw, 5rem);
-                font-weight: 700;
-                margin-bottom: 1rem;
-                background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                line-height: 1;
-            }
-
-            .hero-subtitle {
-                font-size: clamp(1.1rem, 2vw, 1.4rem);
-                color: #4a5568;
-                max-width: 800px;
-                margin: 0 auto;
-                line-height: 1.3;
-                padding: 0 1rem;
-            }
-
-            @media (max-width: 768px) {
-                .hero-slide {
-                    min-height: 600px;
-                    height: calc(100vh - 60px);
-                    padding: 1rem;
-                }
-
-                .hero-content {
-                    padding: 1rem;
-                }
-            }
-
-            .mindshare-chart {
-                height: 400px;
-                background: linear-gradient(145deg, #e0e5ec, #f0f5fc);
-                border-radius: 20px;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .mindshare-chart::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: 
-                    radial-gradient(circle at 20% 30%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 70%, rgba(74, 144, 226, 0.1) 0%, transparent 50%);
-            }
-
-            .topic-tag {
-                display: inline-block;
-                padding: 0.5rem 1rem;
-                border-radius: 999px;
-                background: rgba(74, 144, 226, 0.1);
-                color: #4a5568;
-                margin: 0.25rem;
-                font-size: 0.875rem;
-                transition: all 0.3s ease;
-            }
-
-            .topic-tag:hover {
-                background: rgba(74, 144, 226, 0.2);
-                transform: translateY(-1px);
-            }
-
             @keyframes float {
                 0% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
+                50% { transform: translateY(-5px); }
                 100% { transform: translateY(0px); }
             }
 
@@ -230,184 +176,273 @@
     </head>
     <body class="bg-[#e0e5ec] min-h-screen">
         <!-- Navigation -->
-        <nav class="p-4 neumorph fixed w-full z-50" role="navigation" aria-label="Main navigation">
-            <div class="container mx-auto flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <i class="bi bi-journal-text text-3xl text-blue-600" aria-hidden="true"></i>
-                    <span class="text-2xl font-bold text-gray-700">DeJournals</span>
+        <nav class="fixed w-full top-0 left-0 z-50 bg-white shadow-sm">
+            <div class="container mx-auto py-4 px-6">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="bi bi-journal-text text-3xl text-primary"></i>
+                        <span class="text-2xl font-bold text-secondary">DeJournals</span>
+                    </a>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="browse.html" class="font-medium text-secondary hover:text-primary transition-colors">Browse Journals</a>
+                        <a href="deforums.html" class="font-medium text-secondary hover:text-primary transition-colors">DeForums</a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="PaperModule.showUploadModal()" class="neko-button">
+                            Upload Research
+                        </button>
+                        <button id="profile" class="p-2 text-secondary hover:text-primary" aria-label="User profile">
+                            <i class="bi bi-person-circle text-2xl"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="browse.html" class="neumorph-button px-4 py-2" role="button">Browse Journals</a>
-                    <a href="deforums.html" class="neumorph-button px-4 py-2" role="button">DeForums</a>
-                    <button onclick="PaperModule.showUploadModal()" class="neumorph-button px-4 py-2 bg-blue-500 text-white">Upload Research</button>
-                </div>
-                <button id="profile" class="neumorph-button p-2" aria-label="User profile">
-                    <i class="bi bi-person-circle text-2xl" aria-hidden="true"></i>
-                </button>
             </div>
         </nav>
 
         <!-- Hero Section -->
-        <div class="swiper-container hero-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <div class="hero-decoration"></div>
-                        <div class="hero-content">
-                            <h1 class="hero-title">Decentralised</h1>
-                            <p class="hero-subtitle">Empowering open access to scientific knowledge through distributed networks and blockchain technology</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <div class="hero-decoration"></div>
-                        <div class="hero-content">
-                            <h1 class="hero-title">Demonopolised</h1>
-                            <p class="hero-subtitle">Breaking down barriers in academic publishing, making knowledge accessible to everyone</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <div class="hero-decoration"></div>
-                        <div class="hero-content">
-                            <h1 class="hero-title">Verified Peers</h1>
-                            <p class="hero-subtitle">Building trust through community-driven validation and transparent peer review processes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <div class="hero-decoration"></div>
-                        <div class="hero-content">
-                            <h1 class="hero-title">Global Grants</h1>
-                            <p class="hero-subtitle">Supporting innovative research worldwide through decentralized funding mechanisms</p>
-                        </div>
+        <section class="hero-section bg-gradient-to-r from-[#f8fafc] to-[#EBF5FF]">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <h1 class="hero-title">Decentralized Science <span class="text-primary">for Everyone</span></h1>
+                    <p class="hero-subtitle">Empowering open access to scientific knowledge through distributed networks, transparent peer review, and global collaboration.</p>
+                    <div class="flex flex-wrap gap-4 mt-8">
+                        <a href="browse.html" class="neko-button">
+                            Browse Research
+                        </a>
+                        <a href="#features" class="neko-button-secondary">
+                            Learn More
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
-        </div>
+            <div class="absolute bottom-0 right-0 w-1/3 opacity-10">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#0050C8" d="M42.8,-68.2C55.3,-62.1,65.3,-49.9,72.1,-36.1C78.8,-22.3,82.5,-6.8,79.1,7.1C75.7,21,65.3,33.3,55.3,45.3C45.2,57.3,35.5,69,22.7,74.8C9.9,80.6,-5.9,80.5,-19.7,75.3C-33.5,70.2,-45.3,60.1,-54.8,48C-64.3,35.9,-71.5,21.9,-73.7,6.8C-75.9,-8.3,-73.2,-24.4,-65.2,-37.6C-57.2,-50.8,-43.8,-61,-30.1,-66.7C-16.4,-72.4,-2.3,-73.5,11.5,-71.8C25.4,-70.1,30.3,-74.2,42.8,-68.2Z" transform="translate(100 100)" />
+                </svg>
+            </div>
+        </section>
 
-        <!-- Mindshare Analysis Section -->
-        <div class="container mx-auto px-4 py-16">
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Latest Research Papers -->
-                <div class="neumorph p-6">
-                    <h2 class="text-2xl font-bold mb-4">Latest Research Papers</h2>
-                    <div id="papers-feed" class="space-y-4" role="feed" aria-label="Latest research papers">
-                        <div class="animate-pulse space-y-4">
-                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                            <div class="h-4 bg-gray-200 rounded w-2/3"></div>
-                        </div>
-                    </div>
+        <!-- Mindshare & Research Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Research Insights</h2>
+                    <p class="section-subtitle mx-auto">Discover trends, papers, and discussions all in one place</p>
                 </div>
-
-                <!-- Mindshare Analysis -->
-                <div class="neumorph p-6">
-                    <h2 class="text-2xl font-bold mb-4">Mindshare Analysis</h2>
-                    <p class="text-gray-600 mb-4">AI-driven overview of trending topics</p>
-                    
-                    <div class="mindshare-chart mb-6">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="floating mb-8">
-                                    <i class="bi bi-graph-up text-6xl text-blue-500"></i>
-                                </div>
-                                <p class="text-gray-600">Interactive visualization coming soon</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Latest Research Papers -->
+                    <div class="neko-card p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-primary-light p-3 rounded-full mr-4">
+                                <i class="bi bi-journal-text text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Latest Research Papers</h3>
+                        </div>
+                        <div id="papers-feed" class="space-y-4" role="feed" aria-label="Latest research papers">
+                            <div class="animate-pulse space-y-4">
+                                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <h3 class="text-xl font-bold mb-4">Trending Topics</h3>
-                        <div class="flex flex-wrap justify-center gap-2">
-                            <span class="topic-tag">Blockchain</span>
-                            <span class="topic-tag">AI Ethics</span>
-                            <span class="topic-tag">Climate</span>
-                            <span class="topic-tag">Quantum</span>
+                    <!-- Mindshare Analysis -->
+                    <div class="neko-card p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-primary-light p-3 rounded-full mr-4">
+                                <i class="bi bi-graph-up text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Mindshare Analysis</h3>
+                        </div>
+                        <p class="text-text-secondary mb-6">AI-driven overview of trending topics in research</p>
+                        
+                        <div class="relative h-48 mb-6 bg-gray-50 rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="floating mb-4">
+                                    <i class="bi bi-graph-up text-4xl text-primary"></i>
+                                </div>
+                                <p class="text-text-secondary">Interactive visualization coming soon</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <h4 class="font-semibold mb-4">Trending Topics</h4>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <span class="px-3 py-1 text-xs bg-primary-light text-primary rounded-full">Blockchain</span>
+                                <span class="px-3 py-1 text-xs bg-primary-light text-primary rounded-full">AI Ethics</span>
+                                <span class="px-3 py-1 text-xs bg-primary-light text-primary rounded-full">Climate</span>
+                                <span class="px-3 py-1 text-xs bg-primary-light text-primary rounded-full">Quantum</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Trending Discussions -->
-                <div class="neumorph p-6">
-                    <h2 class="text-2xl font-bold mb-4">Trending Discussions</h2>
-                    <div id="chat-preview" class="space-y-4" role="log" aria-label="Trending discussions">
-                        <div class="animate-pulse space-y-4">
-                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                            <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                    <!-- Trending Discussions -->
+                    <div class="neko-card p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-primary-light p-3 rounded-full mr-4">
+                                <i class="bi bi-chat-dots text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Trending Discussions</h3>
+                        </div>
+                        <div id="chat-preview" class="space-y-4" role="log" aria-label="Trending discussions">
+                            <div class="animate-pulse space-y-4">
+                                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Features Section -->
-        <div class="container mx-auto px-4 mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Why DeJournals?</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="neumorph p-6 text-center">
-                    <i class="bi bi-robot text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
-                    <h3 class="text-xl font-bold mb-2">AI-Generated Summaries</h3>
-                    <p class="text-gray-600">Automatic abstracts & briefs for research submissions</p>
+        <section id="features" class="py-24 bg-gray-light">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Why DeJournals?</h2>
+                    <p class="section-subtitle mx-auto">A new paradigm for scientific publishing and collaboration</p>
                 </div>
-                <div class="neumorph p-6 text-center">
-                    <i class="bi bi-check2-circle text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
-                    <h3 class="text-xl font-bold mb-2">Transparent Peer Review</h3>
-                    <p class="text-gray-600">Upvotes, comments & credibility tracking via XP</p>
-                </div>
-                <div class="neumorph p-6 text-center">
-                    <i class="bi bi-diagram-3 text-4xl text-blue-500 mb-4" aria-hidden="true"></i>
-                    <h3 class="text-xl font-bold mb-2">Decentralized Profiles</h3>
-                    <p class="text-gray-600">Reputation & contributions on-chain</p>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="text-center">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                            <i class="bi bi-robot text-3xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">AI-Generated Summaries</h3>
+                        <p class="text-text-secondary">Automatic abstracts & briefs for research submissions, making complex papers more accessible</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                            <i class="bi bi-check2-circle text-3xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Transparent Peer Review</h3>
+                        <p class="text-text-secondary">Upvotes, comments & credibility tracking via XP, creating a merit-based ecosystem</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                            <i class="bi bi-diagram-3 text-3xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Decentralized Profiles</h3>
+                        <p class="text-text-secondary">Reputation & contributions on-chain, creating a permanent and verifiable scientific record</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Leaderboard Section -->
-        <div class="container mx-auto px-4 mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Top Contributors</h2>
-            <div id="leaderboard" class="grid md:grid-cols-3 gap-8" role="region" aria-label="Top contributors">
-                <!-- Leaderboard entries will be populated here -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Top Contributors</h2>
+                    <p class="section-subtitle mx-auto">Recognizing researchers making an impact in our community</p>
+                </div>
+                <div id="leaderboard" class="grid md:grid-cols-3 gap-8" role="region" aria-label="Top contributors">
+                    <!-- Leaderboard entries will be populated here -->
+                    <!-- Placeholder entries -->
+                    <div class="neko-card p-6 flex items-center">
+                        <div class="bg-primary-light rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                            <span class="text-xl font-bold text-primary">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold">Dr. Emily Chen</h3>
+                            <p class="text-text-secondary text-sm">Quantum Computing</p>
+                            <div class="flex items-center mt-1">
+                                <i class="bi bi-star-fill text-yellow-500 mr-1"></i>
+                                <span class="text-sm font-medium">4,328 XP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neko-card p-6 flex items-center">
+                        <div class="bg-primary-light rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                            <span class="text-xl font-bold text-primary">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold">Prof. James Wilson</h3>
+                            <p class="text-text-secondary text-sm">Neuroscience</p>
+                            <div class="flex items-center mt-1">
+                                <i class="bi bi-star-fill text-yellow-500 mr-1"></i>
+                                <span class="text-sm font-medium">3,945 XP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neko-card p-6 flex items-center">
+                        <div class="bg-primary-light rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                            <span class="text-xl font-bold text-primary">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold">Dr. Aisha Patel</h3>
+                            <p class="text-text-secondary text-sm">Climate Science</p>
+                            <div class="flex items-center mt-1">
+                                <i class="bi bi-star-fill text-yellow-500 mr-1"></i>
+                                <span class="text-sm font-medium">3,712 XP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
-        <footer class="neumorph p-8" role="contentinfo">
-            <div class="container mx-auto">
+        <footer class="bg-gray-light py-16">
+            <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-4 gap-8">
                     <div>
-                        <h3 class="font-bold mb-4">Quick Links</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="hover:text-blue-500">Browse Journals</a></li>
-                            <li><a href="#" class="hover:text-blue-500">Submit Research</a></li>
-                            <li><a href="#" class="hover:text-blue-500">Live Chat</a></li>
-                            <li><a href="#" class="hover:text-blue-500">FAQ</a></li>
+                        <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                        <ul class="space-y-3">
+                            <li><a href="browse.html" class="text-text-secondary hover:text-primary transition-colors">Browse Journals</a></li>
+                            <li><a href="#" class="text-text-secondary hover:text-primary transition-colors">Submit Research</a></li>
+                            <li><a href="deforums.html" class="text-text-secondary hover:text-primary transition-colors">DeForums</a></li>
+                            <li><a href="#" class="text-text-secondary hover:text-primary transition-colors">FAQ</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="font-bold mb-4">Social Links</h3>
+                        <h3 class="text-lg font-bold mb-6">Social Links</h3>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-2xl hover:text-blue-500" aria-label="Twitter"><i class="bi bi-twitter" aria-hidden="true"></i></a>
-                            <a href="#" class="text-2xl hover:text-blue-500" aria-label="Discord"><i class="bi bi-discord" aria-hidden="true"></i></a>
-                            <a href="#" class="text-2xl hover:text-blue-500" aria-label="Email"><i class="bi bi-envelope" aria-hidden="true"></i></a>
+                            <a href="#" class="bg-white p-3 rounded-full text-primary hover:text-white hover:bg-primary transition-colors" aria-label="Twitter">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-white p-3 rounded-full text-primary hover:text-white hover:bg-primary transition-colors" aria-label="Discord">
+                                <i class="bi bi-discord"></i>
+                            </a>
+                            <a href="#" class="bg-white p-3 rounded-full text-primary hover:text-white hover:bg-primary transition-colors" aria-label="Email">
+                                <i class="bi bi-envelope"></i>
+                            </a>
                         </div>
                     </div>
                     <div>
-                        <h3 class="font-bold mb-4">Powered By</h3>
-                        <div class="flex space-x-4">
-                            <span>Web3Auth</span>
-                            <span>OpenAI</span>
-                            <span>IPFS</span>
+                        <h3 class="text-lg font-bold mb-6">Powered By</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="bg-white p-1 rounded">
+                                    <i class="bi bi-shield-check text-primary"></i>
+                                </div>
+                                <span>Web3Auth</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="bg-white p-1 rounded">
+                                    <i class="bi bi-cpu text-primary"></i>
+                                </div>
+                                <span>OpenAI</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="bg-white p-1 rounded">
+                                    <i class="bi bi-hdd-network text-primary"></i>
+                                </div>
+                                <span>IPFS</span>
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-600">
+                        <div class="flex items-center mb-6">
+                            <i class="bi bi-journal-text text-2xl text-primary mr-2"></i>
+                            <span class="text-xl font-bold text-secondary">DeJournals</span>
+                        </div>
+                        <p class="text-sm text-text-secondary">
                             © 2023 DeJournals. All rights reserved.
+                        </p>
+                        <p class="text-sm text-text-secondary mt-2">
+                            Decentralized science platform for open access research
                         </p>
                     </div>
                 </div>
@@ -416,20 +451,20 @@
 
         <!-- Chat Widget -->
         <div id="chat-widget" class="fixed bottom-4 right-4 z-50 hidden">
-            <div class="neumorph w-80">
-                <div class="p-4 border-b flex justify-between items-center">
+            <div class="bg-white rounded-lg shadow-lg w-80 overflow-hidden">
+                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-primary text-white">
                     <h3 class="font-bold">Global Chat</h3>
-                    <button onclick="ChatModule.toggle()" class="text-gray-500 hover:text-gray-700" aria-label="Close chat">
-                        <i class="bi bi-x-lg" aria-hidden="true"></i>
+                    <button onclick="ChatModule.toggle()" class="text-white hover:text-gray-200" aria-label="Close chat">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </div>
-                <div id="chat-messages" class="p-4 neumorph-inset" role="log" aria-label="Chat messages"></div>
-                <div class="p-4">
+                <div id="chat-messages" class="p-4 bg-gray-50" role="log" aria-label="Chat messages"></div>
+                <div class="p-4 border-t border-gray-100">
                     <div class="flex gap-2">
                         <input type="text" id="chat-input" placeholder="Type a message..." 
-                               class="neumorph-inset p-2 w-full" aria-label="Message input">
-                        <button onclick="ChatModule.sendMessage()" class="neumorph-button p-2" aria-label="Send message">
-                            <i class="bi bi-send" aria-hidden="true"></i>
+                               class="neko-input py-2 px-4 flex-grow" aria-label="Message input">
+                        <button onclick="ChatModule.sendMessage()" class="bg-primary text-white p-2 rounded-full" aria-label="Send message">
+                            <i class="bi bi-send"></i>
                         </button>
                     </div>
                 </div>
@@ -439,31 +474,37 @@
         <!-- Upload Modal -->
         <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" role="dialog" aria-labelledby="upload-modal-title">
             <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="neumorph w-full max-w-2xl p-6">
+                <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 id="upload-modal-title" class="text-2xl font-bold">Upload Research Paper</h2>
+                        <h2 id="upload-modal-title" class="text-2xl font-bold text-secondary">Upload Research Paper</h2>
                         <button onclick="PaperModule.hideUploadModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close modal">
-                            <i class="bi bi-x-lg" aria-hidden="true"></i>
+                            <i class="bi bi-x-lg"></i>
                         </button>
                     </div>
-                    <form id="upload-form" class="space-y-4">
+                    <form id="upload-form" class="space-y-6">
                         <div>
-                            <label for="paper-title" class="block mb-2">Title</label>
-                            <input type="text" id="paper-title" class="neumorph-inset p-2 w-full" required>
+                            <label for="paper-title" class="block mb-2 font-medium">Title</label>
+                            <input type="text" id="paper-title" class="neko-input w-full" required>
                         </div>
                         <div>
-                            <label for="paper-abstract" class="block mb-2">Abstract</label>
-                            <textarea id="paper-abstract" class="neumorph-inset p-2 w-full h-32" required></textarea>
+                            <label for="paper-abstract" class="block mb-2 font-medium">Abstract</label>
+                            <textarea id="paper-abstract" class="neko-input w-full h-32" required></textarea>
                         </div>
                         <div>
-                            <label for="paper-file" class="block mb-2">Paper (PDF)</label>
-                            <input type="file" id="paper-file" accept=".pdf" class="neumorph-inset p-2 w-full" required>
+                            <label for="paper-file" class="block mb-2 font-medium">Paper (PDF)</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors">
+                                <input type="file" id="paper-file" accept=".pdf" class="hidden" required>
+                                <label for="paper-file" class="cursor-pointer">
+                                    <i class="bi bi-cloud-upload text-3xl text-primary mb-2 block"></i>
+                                    <span class="text-text-secondary">Click to upload or drag and drop</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="flex justify-end gap-4">
-                            <button type="button" onclick="PaperModule.hideUploadModal()" class="neumorph-button px-4 py-2">
+                            <button type="button" onclick="PaperModule.hideUploadModal()" class="neko-button-secondary">
                                 Cancel
                             </button>
-                            <button type="submit" class="neumorph-button px-4 py-2 bg-blue-500 text-white">
+                            <button type="submit" class="neko-button">
                                 Upload
                             </button>
                         </div>
@@ -476,21 +517,63 @@
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script src="scripts/main.js"></script>
         <script>
-            // Initialize hero swiper
-            new Swiper('.hero-swiper', {
-                slidesPerView: 1,
-                effect: 'fade',
-                speed: 1000,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                loop: true,
+            document.addEventListener('DOMContentLoaded', () => {
+                // Update body background
+                document.body.className = 'bg-white min-h-screen';
+                
+                // Initialize hero section animations
+                const heroElements = document.querySelectorAll('.hero-section h1, .hero-section p, .hero-section .flex');
+                
+                heroElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('animate-fade-in');
+                    }, index * 200);
+                });
+
+                // Add scroll animations
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fade-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                document.querySelectorAll('.section-title, .section-subtitle, .neko-card').forEach(el => {
+                    observer.observe(el);
+                });
+
+                // Create subtle parallax effect on hero background
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const heroSection = document.querySelector('.hero-section');
+                    if (heroSection) {
+                        const heroSvg = heroSection.querySelector('svg');
+                        if (heroSvg) {
+                            heroSvg.style.transform = `translateY(${scrollY * 0.1}px)`;
+                        }
+                    }
+                });
             });
         </script>
+        <style>
+            .animate-fade-in {
+                animation: fadeIn 0.6s ease-out forwards;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
     </body>
     </html>
